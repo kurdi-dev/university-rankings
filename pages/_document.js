@@ -1,13 +1,18 @@
 import { ColorModeScript } from '@chakra-ui/react';
-import NextDocument, { Html, Head, Main, NextScript } from 'next/document';
+import Document, { Html, Head, Main, NextScript } from 'next/document';
 import theme from '../shared/theme';
-
-export default class Document extends NextDocument {
+class MyDocument extends Document {
+  static async getInitialProps(ctx) {
+    const initialProps = await Document.getInitialProps(ctx);
+    // locale is in ctx.locale
+    return { ...initialProps, locale: ctx?.locale || 'en' };
+  }
   render() {
-    const { locale } = this.props.__NEXT_DATA__;
-    const dir = locale === 'en' ? 'ltr' : 'rtl';
     return (
-      <Html dir={dir} lang={locale}>
+      <Html
+        dir={this.props.locale === 'en' ? 'ltr' : 'rtl'}
+        lang={this.props.locale}
+      >
         <Head />
         <body>
           <ColorModeScript initialColorMode={theme.config.initialColorMode} />
@@ -18,3 +23,5 @@ export default class Document extends NextDocument {
     );
   }
 }
+
+export default MyDocument;

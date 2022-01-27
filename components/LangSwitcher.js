@@ -1,18 +1,44 @@
+import { useState } from 'react';
 import { useRouter } from 'next/router';
+import {
+  Flex,
+  Box,
+  Center,
+  Spacer,
+  Select,
+  Circle,
+  Icon,
+} from '@chakra-ui/react';
+import { FiGlobe } from 'react-icons/fi';
 
 function LangSwitcher() {
-  const { locale, push, reload, pathname } = useRouter();
-  const nextLocale = locale === 'en' ? 'ku' : 'en';
-  console.log(locale);
-
-  const onClick = async () => {
-    await push(pathname, { locale: nextLocale });
-    console.log('next lang: ', nextLocale);
-    // force a reload for it to work correctly.
-    reload();
+  const router = useRouter();
+  const [localeValue, setLocaleValue] = useState(router.locale || 'en');
+  const handleLanguageChange = async (e) => {
+    const language = e.target.value;
+    setLocaleValue(language);
+    await router.push('/', '/', { locale: language });
+    router.reload();
   };
 
-  return <button onClick={onClick}>Change to {nextLocale}</button>;
+  return (
+    <Flex direction='row' maxW={150}>
+      <Center mx={2}>
+        <Icon w={5} h={5} as={FiGlobe} />
+      </Center>
+      <Spacer />
+      <Select
+        name='language'
+        onChange={handleLanguageChange}
+        id='lang'
+        value={localeValue}
+      >
+        <option value='en'>English</option>
+        <option value='ckb'>کوردی</option>
+        <option value='ar'>العربیە</option>
+      </Select>
+    </Flex>
+  );
 }
 
 export default LangSwitcher;
