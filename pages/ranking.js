@@ -54,21 +54,21 @@ async function makeUniversitiesJson() {
 }
 
 export const getStaticProps = async (ctx) => {
-  const res = await axios.get('https://www.webometrics.info/en/aw/Iraq');
-  console.log(res.status, ': ', res.statusText);
-  const htmlData = await res.data;
-  if (!htmlData) {
-    return {
-      loading: true,
-    };
-  }
-  // for page 2
-  const res_p2 = await axios.get(
-    'https://www.webometrics.info/en/aw/iraq?page=1'
-  );
-  console.log(res_p2.status, ': ', res.statusText);
+  const htmlData = await axios
+    .get('https://www.webometrics.info/en/aw/Iraq')
+    .then((res) => res.data)
+    .catch((err) => {
+      console.log(err);
+    });
 
-  const htmlData_p2 = await res_p2.data;
+  // for page 2
+  const htmlData_p2 = await axios
+    .get('https://www.webometrics.info/en/aw/iraq?page=1')
+    .then((res) => res.data)
+    .catch((err) => {
+      console.log(err);
+    });
+
   let universities = await makeUniversitiesJson(htmlData, htmlData_p2);
   let iqRank = 1;
   let krgRank = 1;

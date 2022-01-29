@@ -44,9 +44,13 @@ async function makeCitationsJson() {
 }
 
 export const getStaticProps = async (ctx) => {
-  const res = await axios.get('https://www.webometrics.info/en/transparent');
-  const htmlData = await res.data;
-  console.log(res.status, ': ', res.statusText);
+  const htmlData = await axios
+    .get('https://www.webometrics.info/en/transparent')
+    .then((res) => res.data)
+    .catch((err) => {
+      console.log(err);
+    });
+
   if (!htmlData) {
     return {
       loading: true,
