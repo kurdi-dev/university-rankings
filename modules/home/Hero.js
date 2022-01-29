@@ -66,7 +66,6 @@ export default function Hero() {
                 display={{ sm: 'flex' }}
                 justifyContent='center'
                 fontWeight='extrabold'
-                fontFamily='fantasy'
               >
                 <Box rounded='full' shadow='md'>
                   <Button
