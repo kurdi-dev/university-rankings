@@ -1,6 +1,8 @@
 const cheerio = require('cheerio');
 import MainLayout from '../layout/main';
 import CitationTable from '../modules/citation/CitationTable';
+import { Spinner, Center, VStack, Text } from '@chakra-ui/react';
+
 import axios from 'axios';
 
 async function extractElements(htmlData) {
@@ -47,7 +49,7 @@ export const getStaticProps = async (ctx) => {
   console.log(res.status, ': ', res.statusText);
   if (!htmlData) {
     return {
-      notFound: true,
+      loading: true,
     };
   }
   const $ = cheerio.load(htmlData);
@@ -62,10 +64,25 @@ export const getStaticProps = async (ctx) => {
   };
 };
 
-export default function citation({ version, data }) {
+export default function citation({ version, data, loading }) {
   return (
     <MainLayout title={'home'}>
-      <CitationTable data={data} />
+      {loading ? (
+        <Center h='90vh'>
+          <VStack>
+            <Spinner
+              thickness='4px'
+              speed='0.65s'
+              emptyColor='gray.200'
+              color='teal.500'
+              size='xl'
+            />
+            <Text>Data is loading ... Refresh the page!</Text>
+          </VStack>
+        </Center>
+      ) : (
+        <CitationTable data={data} />
+      )}
     </MainLayout>
   );
 }

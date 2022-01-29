@@ -1,6 +1,8 @@
 const cheerio = require('cheerio');
 import MainLayout from '../layout/main';
 import RankingTable from '../modules/ranking/RankingTable';
+import { Center, Spinner, Text, VStack } from '@chakra-ui/react';
+
 import axios from 'axios';
 
 import { krgUniversities } from '../shared/krg-universities';
@@ -57,7 +59,7 @@ export const getStaticProps = async (ctx) => {
   const htmlData = await res.data;
   if (!htmlData) {
     return {
-      notFound: true,
+      loading: true,
     };
   }
   // for page 2
@@ -86,10 +88,25 @@ export const getStaticProps = async (ctx) => {
   };
 };
 
-export default function Ranking({ data }) {
+export default function Ranking({ data, loading }) {
   return (
     <MainLayout title={'University Rankings'}>
-      <RankingTable data={data} />
+      {loading ? (
+        <Center h='90vh'>
+          <VStack>
+            <Spinner
+              thickness='4px'
+              speed='0.65s'
+              emptyColor='gray.200'
+              color='teal.500'
+              size='xl'
+            />
+            <Text>Data is loading ... Refresh the page!</Text>
+          </VStack>
+        </Center>
+      ) : (
+        <RankingTable data={data} />
+      )}
     </MainLayout>
   );
 }
