@@ -1,6 +1,7 @@
 const cheerio = require('cheerio');
 import MainLayout from '../layout/main';
 import RankingTable from '../modules/ranking/RankingTable';
+import axios from 'axios';
 
 import { krgUniversities } from '../shared/krg-universities';
 const webometric_url = 'https://www.webometrics.info';
@@ -51,15 +52,21 @@ async function makeUniversitiesJson() {
 }
 
 export const getStaticProps = async (ctx) => {
-  const res = await fetch('https://www.webometrics.info/en/aw/Iraq');
+  const res = await axios.get('https://www.webometrics.info/en/aw/Iraq');
   console.log(res.status, ': ', res.statusText);
-
-  const htmlData = await res.text();
+  const htmlData = await res.data;
+  if (!htmlData) {
+    return {
+      notFound: true,
+    };
+  }
   // for page 2
-  const res_p2 = await fetch('https://www.webometrics.info/en/aw/iraq?page=1');
+  const res_p2 = await axios.get(
+    'https://www.webometrics.info/en/aw/iraq?page=1'
+  );
   console.log(res_p2.status, ': ', res.statusText);
 
-  const htmlData_p2 = await res_p2.text();
+  const htmlData_p2 = await res_p2.data;
   let universities = await makeUniversitiesJson(htmlData, htmlData_p2);
   let iqRank = 1;
   let krgRank = 1;

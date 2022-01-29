@@ -1,6 +1,7 @@
 const cheerio = require('cheerio');
 import MainLayout from '../layout/main';
 import CitationTable from '../modules/citation/CitationTable';
+import axios from 'axios';
 
 async function extractElements(htmlData) {
   const $ = cheerio.load(htmlData);
@@ -41,10 +42,14 @@ async function makeCitationsJson() {
 }
 
 export const getStaticProps = async (ctx) => {
-  const res = await fetch('https://www.webometrics.info/en/transparent');
+  const res = await axios.get('https://www.webometrics.info/en/transparent');
+  const htmlData = await res.data;
   console.log(res.status, ': ', res.statusText);
-  const htmlData = await res.text();
-
+  if (!htmlData) {
+    return {
+      notFound: true,
+    };
+  }
   const $ = cheerio.load(htmlData);
   let version = $('strong:contains("version")').text();
   let citationsData = await makeCitationsJson(htmlData);
