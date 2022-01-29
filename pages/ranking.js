@@ -71,6 +71,7 @@ export const getStaticProps = async (ctx) => {
     props: {
       data: universitiesData || null,
     },
+    revalidate: 21600, //revalidate after 6 hours
   };
 };
 

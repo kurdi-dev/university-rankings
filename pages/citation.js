@@ -52,6 +52,7 @@ export const getStaticProps = async (ctx) => {
       version,
       data: citationsData,
     },
+    revalidate: 21600, //revalidate after 6 hours
   };
 };
 
