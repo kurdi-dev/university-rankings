@@ -18,8 +18,8 @@ import {
 import { useTable, useSortBy } from 'react-table';
 
 function DataTable({ title, headers, tableData }) {
-  const data = React.useMemo(() => tableData, []);
-  const columns = React.useMemo(() => headers, []);
+  const data = React.useMemo(() => tableData, [tableData]);
+  const columns = React.useMemo(() => headers, [headers]);
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data }, useSortBy);
