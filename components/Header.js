@@ -1,11 +1,9 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import {
   chakra,
   HStack,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
   Box,
   Flex,
   IconButton,
@@ -15,27 +13,34 @@ import {
   VStack,
   Button,
   useColorMode,
-  SimpleGrid,
-  Stack,
   Spacer,
   Icon,
   Square,
 } from '@chakra-ui/react';
 
 const links = [
-  { name: 'home', url: '/', icon: <AiFillHome /> },
-  { name: 'rankings', url: '/rankings', icon: <AiFillHome /> },
-  { name: 'citation', url: '/citaion', icon: <AiFillHome /> },
+  { name: 'Home', url: '/', icon: <AiFillHome /> },
+  { name: 'Rankings', url: '/ranking', icon: <AiFillHome /> },
+  { name: 'Citations', url: '/citation', icon: <AiFillHome /> },
 ];
 import { useViewportScroll } from 'framer-motion';
 
-import { IoIosArrowDown } from 'react-icons/io';
-import { AiFillHome, AiOutlineInbox, AiOutlineMenu } from 'react-icons/ai';
-import { BsFillCameraVideoFill, BsGithub } from 'react-icons/bs';
+import { AiFillHome, AiOutlineMenu } from 'react-icons/ai';
+import { BsGithub } from 'react-icons/bs';
 import { FaMoon, FaSun, FaUniversity } from 'react-icons/fa';
 import LangSwitcher from './LangSwitcher';
 
+const CircleIcon = (props) => (
+  <Icon viewBox='0 0 200 200' {...props}>
+    <path
+      fill='currentColor'
+      d='M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0'
+    />
+  </Icon>
+);
+
 export default function Header() {
+  const router = useRouter();
   const { toggleColorMode: toggleMode } = useColorMode();
   const text = useColorModeValue('dark', 'light');
   const SwitchIcon = useColorModeValue(FaMoon, FaSun);
@@ -107,7 +112,7 @@ export default function Header() {
         w='full'
         overflowY='hidden'
       >
-        <chakra.div h='4.5rem' mx='auto' maxW='1200px'>
+        <chakra.div h='4.5rem' mx='auto' maxW='container.lg'>
           <Flex
             w='full'
             h='full'
@@ -135,6 +140,11 @@ export default function Header() {
                       fontSize='md'
                       _hover={{ color: cl }}
                       _focus={{ boxShadow: 'none' }}
+                      leftIcon={
+                        link.url === router.pathname ? (
+                          <CircleIcon color={'teal.400'} />
+                        ) : null
+                      }
                     >
                       {link.name}
                     </Button>
