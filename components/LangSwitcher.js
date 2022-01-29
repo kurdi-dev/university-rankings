@@ -1,14 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import {
-  Flex,
-  Box,
-  Center,
-  Spacer,
-  Select,
-  Circle,
-  Icon,
-} from '@chakra-ui/react';
+import { Flex, Center, Spacer, Select, Icon } from '@chakra-ui/react';
 import { FiGlobe } from 'react-icons/fi';
 
 function LangSwitcher() {
