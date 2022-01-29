@@ -25,6 +25,7 @@
     "stylis-plugin-rtl": "^2.1.1"
   },
   "devDependencies": {
+    "@netlify/plugin-nextjs": "^4.2.1",
     "eslint": "8.7.0",
     "eslint-config-next": "12.0.8"
   }
