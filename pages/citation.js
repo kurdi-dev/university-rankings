@@ -42,6 +42,7 @@ async function makeCitationsJson() {
 
 export const getStaticProps = async (ctx) => {
   const res = await fetch('https://www.webometrics.info/en/transparent');
+  console.log(res.status, ': ', res.statusText);
   const htmlData = await res.text();
 
   const $ = cheerio.load(htmlData);

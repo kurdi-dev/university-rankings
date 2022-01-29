@@ -52,9 +52,13 @@ async function makeUniversitiesJson() {
 
 export const getStaticProps = async (ctx) => {
   const res = await fetch('https://www.webometrics.info/en/aw/Iraq');
+  console.log(res.status, ': ', res.statusText);
+
   const htmlData = await res.text();
   // for page 2
   const res_p2 = await fetch('https://www.webometrics.info/en/aw/iraq?page=1');
+  console.log(res_p2.status, ': ', res.statusText);
+
   const htmlData_p2 = await res_p2.text();
   let universities = await makeUniversitiesJson(htmlData, htmlData_p2);
   let iqRank = 1;
