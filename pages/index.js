@@ -1,11 +1,12 @@
-import { Heading, Stack } from '@chakra-ui/react';
-import ColorModeChanger from '../components/ColorModeChanger';
-import Header from '../components/Header';
-import LangSwitcher from '../components/LangSwitcher';
+import MainLayout from '../layout/main';
+import Contribute from '../modules/home/Contribute';
+import Hero from '../modules/home/Hero';
+
 export default function Home() {
   return (
-    <Stack>
-      <Header />
-    </Stack>
+    <MainLayout title={'home'}>
+      <Hero />
+      <Contribute />
+    </MainLayout>
   );
 }
