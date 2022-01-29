@@ -3,7 +3,7 @@ import MainLayout from '../layout/main';
 import RankingTable from '../modules/ranking/RankingTable';
 import { Center, Spinner, Text, VStack } from '@chakra-ui/react';
 
-import axios from 'axios';
+import Axios from '../lib/Axios';
 
 import { krgUniversities } from '../shared/krg-universities';
 const webometric_url = 'https://www.webometrics.info';
@@ -54,16 +54,16 @@ async function makeUniversitiesJson() {
 }
 
 export const getStaticProps = async (ctx) => {
-  const htmlData = await axios
-    .get('https://www.webometrics.info/en/aw/Iraq')
+  const htmlData = await Axios.get('https://www.webometrics.info/en/aw/Iraq')
     .then((res) => res.data)
     .catch((err) => {
       console.log(err);
     });
 
   // for page 2
-  const htmlData_p2 = await axios
-    .get('https://www.webometrics.info/en/aw/iraq?page=1')
+  const htmlData_p2 = await Axios.get(
+    'https://www.webometrics.info/en/aw/iraq?page=1'
+  )
     .then((res) => res.data)
     .catch((err) => {
       console.log(err);

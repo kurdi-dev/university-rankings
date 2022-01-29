@@ -3,7 +3,7 @@ import MainLayout from '../layout/main';
 import CitationTable from '../modules/citation/CitationTable';
 import { Spinner, Center, VStack, Text } from '@chakra-ui/react';
 
-import axios from 'axios';
+import Axios from '../lib/Axios';
 
 async function extractElements(htmlData) {
   const $ = cheerio.load(htmlData);
@@ -44,8 +44,9 @@ async function makeCitationsJson() {
 }
 
 export const getStaticProps = async (ctx) => {
-  const htmlData = await axios
-    .get('https://www.webometrics.info/en/transparent')
+  const htmlData = await Axios.get(
+    'https://www.webometrics.info/en/transparent'
+  )
     .then((res) => res.data)
     .catch((err) => {
       console.log(err);
