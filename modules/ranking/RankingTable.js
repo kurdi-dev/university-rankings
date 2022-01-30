@@ -1,6 +1,7 @@
-import React from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import DataTable from '../../components/DataTable';
 import { Box } from '@chakra-ui/react';
+import Card from '../../components/Card';
 
 function RankingTable({ data }) {
   const headers = [
@@ -25,12 +26,14 @@ function RankingTable({ data }) {
     },
   ];
   return (
-    <Box overflowX='auto'>
-      <DataTable
-        title={'IRAQI University Rankings'}
-        headers={headers}
-        tableData={data}
-      />
+    <Box overflowX='auto' mb={8}>
+      <Card>
+        <DataTable
+          title={'IRAQI University Rankings'}
+          headers={headers}
+          tableData={data}
+        />
+      </Card>
     </Box>
   );
 }
