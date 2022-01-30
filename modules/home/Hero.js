@@ -77,6 +77,7 @@ export default function Hero() {
                     justifyContent='center'
                     border='solid 1px transparent'
                     fontSize={{ base: 'md', md: 'lg' }}
+                    fontWeight='bold'
                     rounded='md'
                     px={{ base: 8, md: 10 }}
                     py={{ base: 3, md: 4 }}
@@ -99,6 +100,7 @@ export default function Hero() {
                     py={{ base: 3, md: 4 }}
                     border='solid 1px transparent'
                     fontSize={{ base: 'md', md: 'lg' }}
+                    fontWeight='bold'
                     rounded='md'
                     cursor='pointer'
                   >
@@ -117,10 +119,10 @@ export default function Hero() {
         border='solid 1px transparent'
       >
         <Image
-          h={275}
+          h={325}
           w='full'
           fit='cover'
-          src='/images/hero.png'
+          src='/images/hero.jpg'
           alt='graduation'
           loading='lazy'
         />
