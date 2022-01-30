@@ -1,6 +1,7 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import DataTable from '../../components/DataTable';
 import { Box } from '@chakra-ui/react';
+import Card from '../../components/Card';
 import { krgUniversities } from '../../shared/krg-universities';
 
 function CitationTable({ data }) {
@@ -30,12 +31,14 @@ function CitationTable({ data }) {
     { Header: 'Citations', accessor: 'citation', isNumeric: false },
   ];
   return (
-    <Box overflowX='auto'>
-      <DataTable
-        title={'Top Universities by Citations'}
-        headers={headers}
-        tableData={tableData}
-      />
+    <Box overflowX='auto' mb={8}>
+      <Card flexDirection='column' width='full'>
+        <DataTable
+          title={'Top Universities by Citations'}
+          headers={headers}
+          tableData={tableData}
+        />
+      </Card>
     </Box>
   );
 }

@@ -21,6 +21,7 @@ function LangSwitcher() {
       <Spacer />
       <Select
         name='language'
+        size='sm'
         onChange={handleLanguageChange}
         id='lang'
         value={localeValue}

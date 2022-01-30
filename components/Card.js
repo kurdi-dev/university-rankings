@@ -8,12 +8,11 @@ const Card = ({ children, title, text, useDefaultText, ...rest }) => {
       d='flex'
       flexDirection='column'
       w='auto'
-      roundedTop='lg'
+      borderRadius='xl'
       bg={bgColor}
       // overflow="hidden"
-      boxShadow='0 1px 2px 0 rgba(60,64,67,.3), 0 1px 3px 1px rgba(60,64,67,.15)'
+      shadow='base'
       pos='relative'
-      roundedBottom='lg'
       {...rest}
     >
       {children}
