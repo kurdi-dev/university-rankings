@@ -71,7 +71,7 @@ export const getStaticProps = async (ctx) => {
 
 export default function citation({ version, data, loading }) {
   return (
-    <MainLayout title={'home'}>
+    <MainLayout title={'Citations Ranking'}>
       {loading ? (
         <Center h='90vh'>
           <VStack>

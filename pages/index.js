@@ -4,7 +4,7 @@ import Hero from '../modules/home/Hero';
 
 export default function Home() {
   return (
-    <MainLayout title={'home'}>
+    <MainLayout title={'Home'}>
       <Hero />
       <Contribute />
     </MainLayout>
