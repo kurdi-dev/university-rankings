@@ -1,11 +1,12 @@
 const cheerio = require('cheerio');
+import fetch from 'node-fetch';
 import MainLayout from '../layout/main';
 import CitationTable from '../modules/citation/CitationTable';
 import { Spinner, Center, VStack, Text } from '@chakra-ui/react';
 
 import Axios from '../lib/Axios';
 
-async function extractElements(htmlData) {
+async function extractCitationsElements(htmlData) {
   const $ = cheerio.load(htmlData);
   const trArray = $('tr').toArray();
   let elements = [];
@@ -31,7 +32,7 @@ async function makeCitationsJson() {
   const citations = [];
   // generating university data from each page from htmlData arguments
   for (var i = 0; i < arguments.length; i++) {
-    let elements = await extractElements(arguments[i]);
+    let elements = await extractCitationsElements(arguments[i]);
     for (let index = 0; index < elements.length; index += 3) {
       citations.push({
         university: elements[index],
@@ -44,10 +45,14 @@ async function makeCitationsJson() {
 }
 
 export const getStaticProps = async (ctx) => {
-  const htmlData = await Axios.get(
-    'https://www.webometrics.info/en/transparent'
-  )
-    .then((res) => res.data)
+  const htmlData = await fetch('https://www.webometrics.info/en/transparent', {
+    method: 'GET',
+    mode: 'no-cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    headers: { 'Content-Type': 'application/json' },
+  })
+    .then((res) => res.text())
     .catch((err) => {
       console.log(err);
     });

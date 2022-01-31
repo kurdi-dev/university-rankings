@@ -1,4 +1,6 @@
 const cheerio = require('cheerio');
+import fetch from 'node-fetch';
+
 import MainLayout from '../layout/main';
 import RankingTable from '../modules/ranking/RankingTable';
 import { Center, Spinner, Text, VStack } from '@chakra-ui/react';
@@ -8,7 +10,7 @@ import Axios from '../lib/Axios';
 import { krgUniversities } from '../shared/krg-universities';
 const webometric_url = 'https://www.webometrics.info';
 
-async function extractElements(htmlData) {
+async function extractRankingElements(htmlData) {
   const $ = cheerio.load(htmlData);
   const trArray = $('tr').toArray();
   let elements = [];
@@ -36,7 +38,7 @@ async function makeUniversitiesJson() {
 
   // generating university data from each page from htmlData arguments
   for (var i = 0; i < arguments.length; i++) {
-    let elements = await extractElements(arguments[i]);
+    let elements = await extractRankingElements(arguments[i]);
     for (let index = 0; index < elements.length; index += 8) {
       universities.push({
         rank: elements[index],
@@ -54,17 +56,30 @@ async function makeUniversitiesJson() {
 }
 
 export const getStaticProps = async (ctx) => {
-  const htmlData = await Axios.get('https://www.webometrics.info/en/aw/Iraq')
-    .then((res) => res.data)
+  const htmlData = await fetch('https://www.webometrics.info/en/aw/Iraq', {
+    method: 'GET',
+    mode: 'no-cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    headers: { 'Content-Type': 'application/json' },
+  })
+    .then((res) => res.text())
     .catch((err) => {
       console.log(err);
     });
 
   // for page 2
-  const htmlData_p2 = await Axios.get(
-    'https://www.webometrics.info/en/aw/iraq?page=1'
+  const htmlData_p2 = await fetch(
+    'https://www.webometrics.info/en/aw/iraq?page=1',
+    {
+      method: 'GET',
+      mode: 'no-cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+    }
   )
-    .then((res) => res.data)
+    .then((res) => res.text())
     .catch((err) => {
       console.log(err);
     });
