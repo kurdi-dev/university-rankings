@@ -6,6 +6,7 @@ import {
   useColorModeValue,
   Stack,
   Button,
+  Link,
 } from '@chakra-ui/react';
 
 import { FaGithub } from 'react-icons/fa';
@@ -43,22 +44,27 @@ export default function Contribute() {
             mt={{ base: 8, lg: 0 }}
             shrink={{ lg: 0 }}
           >
-            <Button
-              w={['full', , 'auto']}
-              leftIcon={<FaGithub />}
-              size='lg'
-              display='inline-flex'
-              alignItems='center'
-              justifyContent='center'
-              px={5}
-              py={3}
-              border='solid transparent'
-              fontWeight='bold'
-              rounded='md'
-              shadow='md'
+            <Link
+              href='https://github.com/kurdi-dev/university-rankings'
+              isExternal
             >
-              Github Repo
-            </Button>
+              <Button
+                w={['full', , 'auto']}
+                leftIcon={<FaGithub />}
+                size='lg'
+                display='inline-flex'
+                alignItems='center'
+                justifyContent='center'
+                px={5}
+                py={3}
+                border='solid transparent'
+                fontWeight='bold'
+                rounded='md'
+                shadow='md'
+              >
+                Github Repo
+              </Button>
+            </Link>
           </Stack>
         </Box>
       </Box>

@@ -6,6 +6,7 @@ import {
   Text,
   Button,
 } from '@chakra-ui/react';
+import Link from 'next/link';
 
 export default function Hero() {
   return (
@@ -68,44 +69,50 @@ export default function Hero() {
                 fontWeight='extrabold'
               >
                 <Box rounded='full' shadow='md'>
-                  <Button
-                    colorScheme='teal'
-                    size='xl'
-                    w='full'
-                    display='flex'
-                    alignItems='center'
-                    justifyContent='center'
-                    border='solid 1px transparent'
-                    fontSize={{ base: 'md', md: 'lg' }}
-                    fontWeight='bold'
-                    rounded='md'
-                    px={{ base: 8, md: 10 }}
-                    py={{ base: 3, md: 4 }}
-                    cursor='pointer'
-                  >
-                    University Rankings
-                  </Button>
+                  <Link href='/ranking' passHref>
+                    <Button
+                      colorScheme='teal'
+                      size='xl'
+                      w='full'
+                      display='flex'
+                      alignItems='center'
+                      justifyContent='center'
+                      border='solid 1px transparent'
+                      fontSize={{ base: 'md', md: 'lg' }}
+                      fontWeight='bold'
+                      rounded='md'
+                      px={{ base: 8, md: 10 }}
+                      py={{ base: 3, md: 4 }}
+                      cursor='pointer'
+                      as='a'
+                    >
+                      University Rankings
+                    </Button>
+                  </Link>
                 </Box>
                 <Box mt={[3, 0]} ml={[null, 3]}>
-                  <Button
-                    // colorScheme='blackAlpha'
-                    colorScheme='teal'
-                    variant='outline'
-                    size='xl'
-                    w='full'
-                    display='flex'
-                    alignItems='center'
-                    justifyContent='center'
-                    px={{ base: 8, md: 10 }}
-                    py={{ base: 3, md: 4 }}
-                    border='solid 1px transparent'
-                    fontSize={{ base: 'md', md: 'lg' }}
-                    fontWeight='bold'
-                    rounded='md'
-                    cursor='pointer'
-                  >
-                    Citations Rankings
-                  </Button>
+                  <Link href='/citation' passHref>
+                    <Button
+                      // colorScheme='blackAlpha'
+                      colorScheme='teal'
+                      variant='outline'
+                      size='xl'
+                      w='full'
+                      display='flex'
+                      alignItems='center'
+                      justifyContent='center'
+                      px={{ base: 8, md: 10 }}
+                      py={{ base: 3, md: 4 }}
+                      border='solid 1px transparent'
+                      fontSize={{ base: 'md', md: 'lg' }}
+                      fontWeight='bold'
+                      rounded='md'
+                      cursor='pointer'
+                      as='a'
+                    >
+                      Citations Rankings
+                    </Button>
+                  </Link>
                 </Box>
               </Box>
             </Box>
