@@ -1,13 +1,11 @@
 const cheerio = require('cheerio');
-import fetch from 'node-fetch';
 
 import MainLayout from '../layout/main';
 import RankingTable from '../modules/ranking/RankingTable';
 import { Center, Spinner, Text, VStack } from '@chakra-ui/react';
 
-import Axios from '../lib/Axios';
-
 import { krgUniversities } from '../shared/krg-universities';
+import fetcher from '../lib/fetcher';
 const webometric_url = 'https://www.webometrics.info';
 
 async function extractRankingElements(htmlData) {
@@ -56,31 +54,12 @@ async function makeUniversitiesJson() {
 }
 
 export const getStaticProps = async (ctx) => {
-  const htmlData = await fetch('https://www.webometrics.info/en/aw/Iraq', {
-    method: 'GET',
-    mode: 'no-cors',
-    cache: 'no-cache',
-    credentials: 'same-origin',
-  })
-    .then((res) => res.text())
-    .catch((err) => {
-      console.log(err);
-    });
+  const htmlData = await fetcher('https://www.webometrics.info/en/aw/Iraq');
 
   // for page 2
-  const htmlData_p2 = await fetch(
-    'https://www.webometrics.info/en/aw/iraq?page=1',
-    {
-      method: 'GET',
-      mode: 'no-cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-    }
-  )
-    .then((res) => res.text())
-    .catch((err) => {
-      console.log(err);
-    });
+  const htmlData_p2 = await fetcher(
+    'https://www.webometrics.info/en/aw/iraq?page=1'
+  );
 
   let universities = await makeUniversitiesJson(htmlData, htmlData_p2);
   let iqRank = 1;
