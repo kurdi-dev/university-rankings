@@ -11,7 +11,7 @@ export default function MyContainer(props) {
   const meta = {
     title: 'Iraq University Rankings',
     description: `Iraq university rankings based on Webometrics Ranking of World Universities`,
-    image: 'https://universities.kurdi.dev/images/banner.png',
+    image: 'https://universities.kurdi.dev/images/hero.png',
     type: 'website',
     ...customMeta,
   };
