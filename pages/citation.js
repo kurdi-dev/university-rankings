@@ -50,7 +50,6 @@ export const getStaticProps = async (ctx) => {
     mode: 'no-cors',
     cache: 'no-cache',
     credentials: 'same-origin',
-    headers: { 'Content-Type': 'application/json' },
   })
     .then((res) => res.text())
     .catch((err) => {
