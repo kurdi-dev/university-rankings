@@ -1,10 +1,11 @@
 const cheerio = require('cheerio');
-import fetch from 'node-fetch';
+
 import MainLayout from '../layout/main';
 import CitationTable from '../modules/citation/CitationTable';
 import { Spinner, Center, VStack, Text } from '@chakra-ui/react';
 
 import Axios from '../lib/Axios';
+import fetcher from '../lib/fetcher';
 
 async function extractCitationsElements(htmlData) {
   const $ = cheerio.load(htmlData);
@@ -45,17 +46,7 @@ async function makeCitationsJson() {
 }
 
 export const getStaticProps = async (ctx) => {
-  const htmlData = await fetch('https://www.webometrics.info/en/transparent', {
-    method: 'GET',
-    mode: 'no-cors',
-    cache: 'no-cache',
-    credentials: 'same-origin',
-  })
-    .then((res) => res.text())
-    .catch((err) => {
-      console.log(err);
-    });
-
+  const htmlData = await fetcher('https://www.webometrics.info/en/transparent');
   if (!htmlData) {
     return {
       loading: true,
