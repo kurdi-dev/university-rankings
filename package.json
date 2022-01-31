@@ -17,6 +17,7 @@
     "axios-retry": "^3.2.4",
     "cheerio": "^1.0.0-rc.10",
     "framer-motion": "^6.2.3",
+    "https-proxy-agent": "^5.0.0",
     "make-fetch-happen": "^10.0.0",
     "next": "^12.0.9",
     "node-fetch": "^3.2.0",
@@ -25,7 +26,8 @@
     "react-icons": "^4.3.1",
     "react-table": "^7.7.0",
     "stylis": "^4.0.13",
-    "stylis-plugin-rtl": "^2.1.1"
+    "stylis-plugin-rtl": "^2.1.1",
+    "url": "^0.11.0"
   },
   "devDependencies": {
     "@netlify/plugin-nextjs": "^3.9.2",
