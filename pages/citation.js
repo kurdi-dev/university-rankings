@@ -4,7 +4,6 @@ import MainLayout from '../layout/main';
 import CitationTable from '../modules/citation/CitationTable';
 import { Spinner, Center, VStack, Text } from '@chakra-ui/react';
 
-import Axios from '../lib/Axios';
 import fetcher from '../lib/fetcher';
 
 async function extractCitationsElements(htmlData) {
