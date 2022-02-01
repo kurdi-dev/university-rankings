@@ -7,6 +7,7 @@ const Card = ({ children, title, text, useDefaultText, ...rest }) => {
     <Box
       d='flex'
       flexDirection='column'
+      overflowX='scroll'
       w='auto'
       borderRadius='xl'
       bg={bgColor}

@@ -73,9 +73,11 @@ export default function Header() {
       pb={4}
       m={2}
       bg={bg}
+      zIndex={1000}
       spacing={3}
       rounded='sm'
       shadow='sm'
+      h='full'
     >
       <CloseButton
         aria-label='Close menu'
